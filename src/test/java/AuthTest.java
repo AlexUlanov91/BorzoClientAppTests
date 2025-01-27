@@ -23,21 +23,15 @@ public class AuthTest extends Base{
         profile.pressLoginBtn();
         profile.loginIndividualPerson(input.get("phoneNumber"), input.get("password"));
 
-        // Сравнение номера телефона в toolbar с номером, использованным при входе
+        // Comparing phone number in toolbar and used phone number to log in
         Assertions.assertEquals(
                 StringUtils.deleteWhitespace(profile.getPhoneToolbar().getText()),
                 input.get("phoneNumber")
         );
-        // Ассерт на наличие кнопки топ апа
-        try {
-            // Попытка найти кнопку топ апа
-            profile.getTopUpButton();
-            // Если элемент найден, тест проходит успешно
-            Assertions.assertTrue(true);
-        } catch (NoSuchElementException e) {
-            // Если элемент не найден, тест проваливается
-            Assertions.fail("Top up button is not present.");
-        }
+
+        // Top-up button presence assert
+        Assertions.assertDoesNotThrow(() -> profile.getTopUpButton(),
+                "Top up button is not present.");
         profile.logOut();
     }
 
@@ -47,27 +41,20 @@ public class AuthTest extends Base{
         profile.pressLoginBtn();
         profile.loginCompany(input.get("email"), input.get("password"));
 
-        // Сравнение емейла в toolbar с емейлом, использованным при входе
+        // Comparing email in toolbar and used email to log in
         Assertions.assertEquals(
                 StringUtils.deleteWhitespace(profile.getPhoneToolbar().getText()),
                 input.get("email")
         );
-        // Ассерт на наличие кнопки топ апа
-        try {
-            // Попытка найти кнопку топ апа
-            profile.getTopUpButton();
-            // Если элемент найден, тест проходит успешно
-            Assertions.assertTrue(true);
-        } catch (NoSuchElementException e) {
-            // Если элемент не найден, тест проваливается
-            Assertions.fail("Top up button is not present.");
-        }
+        // Top-up button presence assert
+
+        Assertions.assertDoesNotThrow(() -> profile.getTopUpButton(),
+                "Top up button is not present.");
         profile.logOut();
     }
 
 
-    // Методы для параметризации данных:
-
+    // Parametrised data methods:
     static Stream<HashMap<String, String>> getIndividualPersonData() throws IOException {
         List<HashMap<String, String>> data = getJsonData(System.getProperty("user.dir") + "\\src\\test\\testData\\IndividualPersonCredentials.json");
         return data.stream();
