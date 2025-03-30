@@ -48,7 +48,7 @@ public class WelcomePage extends Actions {
             selectCity("Mumbai");
             skipSurvey();
             declineNotifications();
-            // Иногда пункты меню нужно кликнуть 2жды так как рандомно всплывает поп ап подсказки, который можно скипнуть тапом в любое место
+            // Иногда тут рандомно всплывает поп ап подсказки, который можно скипнуть тапом в любое место, поэтому во избежания flacky теста кликаем на профиль 2жды
             clickElementMultipleTimes(By.id("global.dostavista.client.test:id/bottom_navigation_profile"), 2);
         } else {
             clickElementMultipleTimes(By.id("global.dostavista.client.test:id/bottom_navigation_profile"), 2);
